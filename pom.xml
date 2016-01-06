@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.geoint.terpene</groupId>
+    <artifactId>terpene</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+    
+    <modules>
+        <!-- core terpene modules -->
+        <module>terpene-api</module>
+        <module>terpene-spi</module>
+        <module>terpene-core</module>
+        
+        <!-- Official terpene libraries and tools -->
+        <module>terpene-rest-client</module>
+        <module>terpene-cli</module>
+        
+        <!-- Example/demo code -->
+        <module>terpene-demo-component</module>
+        
+        <!-- Official platform implementations -->
+        <module>terpene-platform-jvm</module>
+    </modules>
+    
+     
+</project>
