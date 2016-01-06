@@ -27,7 +27,8 @@
         
         <!-- Official platform implementations -->
         <module>terpene-platform-jvm</module>
-    </modules>
+    <module>terpene-mvnsite</module>
+  </modules>
     
      
 </project>
