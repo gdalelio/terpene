@@ -16,11 +16,12 @@
   <body>
     <links>
       <item name="geoint.org" href="https://geoint.org/" />
-      <item name="terpene website" href="https://terpene.geoint.org/"/>
+      <item name="source code" href="https://github.com/GEOINT/terpene"/>
     </links>
 
     <menu name="terpene">
       <item name="FAQ" href="faq.html"/>
+      <item name="Support" href="support.html"/>
     </menu>
   </body>
 </project>
