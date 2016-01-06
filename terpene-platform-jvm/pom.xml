@@ -8,6 +8,9 @@
     </parent>
     <artifactId>terpene-platform-jvm</artifactId>
     <packaging>jar</packaging>
+    <properties>
+        <jetty.version>9.3.6.v20151106</jetty.version>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
