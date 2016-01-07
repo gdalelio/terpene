@@ -3,7 +3,7 @@ package org.geoint.terpene.component.event;
 import org.geoint.acetate.domain.event.Event;
 import org.geoint.terpene.component.ComponentStatus;
 import org.geoint.terpene.component.TerpeneComponent;
-import org.geoint.terpene.platform.platform.TerpenePlatform;
+import org.geoint.terpene.platform.TerpenePlatform;
 
 /**
  *

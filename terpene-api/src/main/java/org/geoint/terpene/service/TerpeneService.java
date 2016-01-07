@@ -13,17 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geoint.terpene.service.service;
+
+package org.geoint.terpene.service;
+
+import org.geoint.acetate.domain.entity.Entity;
+import org.geoint.terpene.component.TerpeneComponent;
+
 
 /**
- * Meta details about a terpene service component contract.
  * 
  * @author steve_siebert
+ * @param <S> service interface
+ * @param <C> component instance type
  */
-public final class ServiceContract {
-    
-    private final String name;
-    private final ComponentVersion version;
-    
-    
+@Entity(name="service")
+public interface TerpeneService<S, C extends S> extends TerpeneComponent<C>{
+
+    Class<S> getServiceType();
 }

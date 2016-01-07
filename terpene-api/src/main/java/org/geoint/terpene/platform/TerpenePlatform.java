@@ -1,4 +1,4 @@
-package org.geoint.terpene.platform.platform;
+package org.geoint.terpene.platform;
 
 import java.util.Collection;
 import org.geoint.acetate.domain.entity.Entity;

@@ -1,6 +1,6 @@
-package org.geoint.terpene.service.service;
+package org.geoint.terpene.service;
 
-import org.geoint.terpene.service.service.TerpeneService;
+import org.geoint.terpene.service.TerpeneService;
 import java.util.Collection;
 
 /**

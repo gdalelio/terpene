@@ -6,7 +6,7 @@ import org.geoint.acetate.domain.entity.Entity;
 import org.geoint.terpene.TerpeneLocality;
 import org.geoint.terpene.component.code.TerpeneComponentBundle;
 import org.geoint.terpene.component.container.ComponentContainer;
-import org.geoint.terpene.service.service.ServiceContract;
+import org.geoint.terpene.service.ServiceContract;
 
 /**
  * Entity to manage a terpene executable which runs on a supporting

@@ -1,0 +1,57 @@
+/*
+ * Copyright 2016 geoint.org.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.geoint.terpene.domain;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ * Declares a class as a representation of a domain event type.
+ *
+ * @author steve_siebert
+ */
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface DomainEvent {
+
+    /**
+     * Name of the domain this event type is declared.
+     *
+     * @return domain name of the event
+     */
+    String domain();
+
+    /**
+     * Optional event type name.
+     * <p>
+     * If not provided the event type name is derived from the domain and class
+     * name.
+     *
+     * @return event type
+     */
+    String name() default "";
+
+    /**
+     * Version(s) of the domain for this event type.
+     *
+     * @return domain version for this event
+     */
+    String version();
+}

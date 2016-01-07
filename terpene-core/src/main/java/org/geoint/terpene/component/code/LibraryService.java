@@ -16,7 +16,7 @@
 package org.geoint.terpene.component.code;
 
 import java.util.Collection;
-import org.geoint.terpene.service.service.Service;
+import org.geoint.terpene.service.Service;
 
 /**
  *

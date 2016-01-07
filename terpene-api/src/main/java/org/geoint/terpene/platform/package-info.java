@@ -13,26 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geoint.terpene.service.service;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import org.geoint.metamodel.annotation.Model;
-import org.geoint.metamodel.annotation.NoArg;
+@Domain(domain="org.geoint.terpene", domainVersion="1.0-BETA")
+package org.geoint.terpene.platform;
 
-/**
- * Annotates a terpene component method used to stop a the component.
- *
- * @author steve_siebert
- */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-@Documented
-@Model
-@NoArg
-public @interface Stop {
+import org.geoint.acetate.domain.annotation.Domain;
 
-}

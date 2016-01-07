@@ -1,4 +1,4 @@
-package org.geoint.terpene.service.service;
+package org.geoint.terpene.service;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

@@ -13,22 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geoint.terpene.guid;
+package org.geoint.terpene.service;
 
-import org.geoint.terpene.service.Service;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import org.geoint.metamodel.annotation.Model;
+import org.geoint.metamodel.annotation.NoArg;
 
 /**
- * Globally unique identifier (GUID) generation service.
+ * Annotates a terpene component method used to stop a the component.
  *
  * @author steve_siebert
  */
-@Service
-public interface GuidGenerator {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@Documented
+@Model
+@NoArg
+public @interface Stop {
 
-    /**
-     * Generate a new GUID.
-     *
-     * @return globally unique identifier
-     */
-    String generate();
 }

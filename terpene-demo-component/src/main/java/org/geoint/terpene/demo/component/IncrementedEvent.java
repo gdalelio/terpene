@@ -4,27 +4,27 @@ package org.geoint.terpene.demo.component;
  *
  * @author steve_siebert
  */
-public class DemoEvent {
+public class IncrementedEvent {
 
-    private final long sequence;
+    private final int newValue;
 
-    public DemoEvent(long sequence) {
-        this.sequence = sequence;
+    public IncrementedEvent(int newValue) {
+        this.newValue = newValue;
     }
 
-    public long getSequence() {
-        return sequence;
+    public int getNewValue() {
+        return newValue;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(sequence);
+        return String.format("Incremented to %d", newValue);
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 83 * hash + (int) (this.sequence ^ (this.sequence >>> 32));
+        int hash = 5;
+        hash = 53 * hash + this.newValue;
         return hash;
     }
 
@@ -39,8 +39,8 @@ public class DemoEvent {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final DemoEvent other = (DemoEvent) obj;
-        if (this.sequence != other.sequence) {
+        final IncrementedEvent other = (IncrementedEvent) obj;
+        if (this.newValue != other.newValue) {
             return false;
         }
         return true;

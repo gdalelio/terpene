@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 geoint.org.
+ * Copyright 2016 geoint.org.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,22 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geoint.terpene.guid;
+package org.geoint.terpene.domain;
 
-import org.geoint.terpene.service.Service;
+import org.geoint.terpene.TerpeneException;
 
 /**
- * Globally unique identifier (GUID) generation service.
+ * Root exception type for all checked exceptions thrown from the entity
+ * management system within terpene.
  *
  * @author steve_siebert
  */
-@Service
-public interface GuidGenerator {
+public abstract class EntityException extends TerpeneException {
 
-    /**
-     * Generate a new GUID.
-     *
-     * @return globally unique identifier
-     */
-    String generate();
+    public EntityException() {
+    }
+
+    public EntityException(String message) {
+        super(message);
+    }
+
+    public EntityException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public EntityException(Throwable cause) {
+        super(cause);
+    }
+
 }

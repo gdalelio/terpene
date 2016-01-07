@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 geoint.org.
+ * Copyright 2016 geoint.org.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,22 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geoint.terpene.guid;
-
-import org.geoint.terpene.service.Service;
+package org.geoint.terpene.domain;
 
 /**
- * Globally unique identifier (GUID) generation service.
+ * Metamodel of an Entity within a domain.
  *
  * @author steve_siebert
  */
-@Service
-public interface GuidGenerator {
+public interface EntityModel {
 
-    /**
-     * Generate a new GUID.
-     *
-     * @return globally unique identifier
-     */
-    String generate();
+    
 }

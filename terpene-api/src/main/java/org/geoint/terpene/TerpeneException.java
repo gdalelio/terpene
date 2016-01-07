@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 geoint.org.
+ * Copyright 2016 geoint.org.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,9 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.geoint.terpene;
 
-@Domain(domain="org.geoint.terpene", domainVersion="1.0-BETA")
-package org.geoint.terpene.platform.platform;
+/**
+ * Root checked exception for all exceptions thrown by the Terpene framework.
+ *
+ * @author steve_siebert
+ */
+public abstract class TerpeneException extends Exception {
 
-import org.geoint.acetate.domain.annotation.Domain;
+    public TerpeneException() {
+    }
 
+    public TerpeneException(String message) {
+        super(message);
+    }
+
+    public TerpeneException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public TerpeneException(Throwable cause) {
+        super(cause);
+    }
+
+}
