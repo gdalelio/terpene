@@ -57,4 +57,7 @@ public interface Entity<T> {
      */
     T getInstance();
 
+    Collection<EntityOperation> getOperations();
+    
+    Collection<EventHandler> getHandlers();
 }
