@@ -37,27 +37,5 @@ public interface EntityRepository<T> {
      */
     Optional<DomainEntity<T>> find(GUID id);
 
-    /**
-     * Create a new DomainEntity instance with default state.
-     *
-     * @return new DomainEntity instance
-     */
-    DomainEntity<T> create();
-
-    /**
-     * Apply the event to the domain.
-     *
-     * @param event domain event to apply to the domain
-     * @return entity after the event is applied
-     * @throws UnknownEntityException
-     */
-    DomainEntity<T> apply(EntityEventMessage event) throws UnknownEntityException;
-
-    /**
-     * Remove an DomainEntity instance from the repository.
-     *
-     * @param entityId unique entity instance identifier
-     * @throws UnknownEntityExcpetion
-     */
-    void delete(GUID entityId) throws UnknownEntityExcpetion;
+    EntityQuery<T> find ();
 }

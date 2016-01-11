@@ -15,6 +15,7 @@
     <modules>
         <!-- core terpene modules -->
         <module>terpene-api</module>
+        <module>terpene-cdi</module>
         <module>terpene-spi</module>
         <module>terpene-core</module>
         
@@ -27,8 +28,8 @@
         
         <!-- Official platform implementations -->
         <module>terpene-platform-jvm</module>
-    <module>terpene-mvnsite</module>
-  </modules>
+        <module>terpene-mvnsite</module>
+    </modules>
     
      
 </project>
