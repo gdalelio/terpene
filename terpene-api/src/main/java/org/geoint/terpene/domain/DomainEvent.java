@@ -15,43 +15,55 @@
  */
 package org.geoint.terpene.domain;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.util.Optional;
+import org.geoint.terpene.domain.model.EventModel;
+import org.geoint.terpene.util.GUID;
 
 /**
- * Declares a class as a representation of a domain event type.
+ * A domain event instance.
  *
  * @author steve_siebert
+ * @param <T> java class representing the domain event
  */
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-public @interface DomainEvent {
+public interface DomainEvent<T> extends DomainObject<T> {
 
     /**
-     * Name of the domain this event type is declared.
+     * Model of the domain event.
      *
-     * @return domain name of the event
+     * @return domain event model
      */
-    String domain();
+    @Override
+    EventModel<T> getModel();
 
     /**
-     * Optional event type name.
+     * Unique identifier of the event instance.
+     *
+     * @return domain event unique id
+     */
+    GUID getId();
+
+    /**
+     * Domain entity instance which this event was associated.
      * <p>
-     * If not provided the event type name is derived from the domain and class
-     * name.
+     * Note that this method is guaranteed to return the domain entity instance
+     * metadata, but a call to (@link DomainEntity#getInstance() the instance
+     * data} may return null if the entity instance at the specified version
+     * could not be resolved.
      *
-     * @return event type
+     * @return associated entity metadata
      */
-    String name() default "";
+    DomainEntity<?> getAssociatedEntity();
 
     /**
-     * Version(s) of the domain for this event type.
+     * Metadata about the event that triggered this event.
+     * <p>
+     * Note that this method is guaranteed to return the domain event metadata,
+     * but a call to the {@link DomainEvent#getInstance() the instance data} may
+     * return null if the event instance data could not be resolved.
      *
-     * @return domain version for this event
+     * @return triggering event information or null if there was no triggering
+     * event
      */
-    String version();
+    Optional<DomainEvent> getTriggeringEvent();
+
 }

@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geoint.terpene.domain;
+package org.geoint.terpene.domain.repo;
 
 import java.util.Optional;
 import javax.lang.model.UnknownEntityException;
+import org.geoint.terpene.domain.DomainEntity;
+import org.geoint.terpene.domain.UnknownEntityExcpetion;
 import org.geoint.terpene.util.GUID;
 
 /**
@@ -33,14 +35,14 @@ public interface EntityRepository<T> {
      * @param id entity instance identifier
      * @return entity instance, if found
      */
-    Optional<Entity<T>> find(GUID id);
+    Optional<DomainEntity<T>> find(GUID id);
 
     /**
-     * Create a new Entity instance with default state.
+     * Create a new DomainEntity instance with default state.
      *
-     * @return new Entity instance
+     * @return new DomainEntity instance
      */
-    Entity<T> create();
+    DomainEntity<T> create();
 
     /**
      * Apply the event to the domain.
@@ -49,10 +51,10 @@ public interface EntityRepository<T> {
      * @return entity after the event is applied
      * @throws UnknownEntityException
      */
-    Entity<T> apply(EntityEventMessage event) throws UnknownEntityException;
+    DomainEntity<T> apply(EntityEventMessage event) throws UnknownEntityException;
 
     /**
-     * Remove an Entity instance from the repository.
+     * Remove an DomainEntity instance from the repository.
      *
      * @param entityId unique entity instance identifier
      * @throws UnknownEntityExcpetion

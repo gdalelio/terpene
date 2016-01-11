@@ -22,36 +22,22 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Defines a class as an object representation of a domain Entity.
+ * Defines a method as one that handles a domain event.
  *
  * @author steve_siebert
  */
-@Target(ElementType.TYPE)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Entity {
+public @interface Handles {
 
     /**
-     * Name of the domain this entity type.
-     *
-     * @return domain name of the event
-     */
-    String domain();
-
-    /**
-     * Version(s) of the domain this class represents the entity type.
-     *
-     * @return domain version for this entity
-     */
-    String version();
-
-    /**
-     * Optional entity type name.
+     * Optional explicit name of the handler.
      * <p>
-     * If not provided the entity type name is derived from the domain and class
-     * name.
+     * If not explicitly set the handler name will be derived from the domain,
+     * class, and method.
      *
-     * @return entity component name
+     * @return explicit handler name or null if the default name should be used
      */
     String name() default "";
 
@@ -60,8 +46,7 @@ public @interface Entity {
      * <p>
      * If not set there will not be a description.
      *
-     * @return description or null if no description is provided
+     * @return handler description or null if no description is provided
      */
     String desc() default "";
-
 }

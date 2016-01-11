@@ -22,40 +22,40 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Defines a class as an object representation of a domain Entity.
+ * Declares a class as a representation of a domain event type.
  *
  * @author steve_siebert
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Entity {
+public @interface Event {
 
     /**
-     * Name of the domain this entity type.
+     * Name of the domain this event type is declared.
      *
      * @return domain name of the event
      */
     String domain();
 
     /**
-     * Version(s) of the domain this class represents the entity type.
+     * Version(s) of the domain for this event type.
      *
-     * @return domain version for this entity
+     * @return domain version for this event
      */
     String version();
 
     /**
-     * Optional entity type name.
+     * Optional event type name.
      * <p>
-     * If not provided the entity type name is derived from the domain and class
+     * If not provided the event type name is derived from the domain and class
      * name.
      *
-     * @return entity component name
+     * @return event type
      */
     String name() default "";
 
-    /**
+     /**
      * Optional description.
      * <p>
      * If not set there will not be a description.
@@ -63,5 +63,5 @@ public @interface Entity {
      * @return description or null if no description is provided
      */
     String desc() default "";
-
+    
 }

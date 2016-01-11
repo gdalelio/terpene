@@ -13,14 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geoint.terpene.domain;
+package org.geoint.terpene.domain.model;
+
+import java.util.Collection;
 
 /**
- * Metamodel of an Entity within a domain.
+ * Model of a domain object.
  *
  * @author steve_siebert
+ * @param <T> java type that represents this domain object
  */
-public interface EntityModel {
+public interface ObjectModel<T> extends DataModel<T> {
 
-    
+    /**
+     * Model(s) of the domain objects that compose this object.
+     *
+     * @return composite models
+     */
+    Collection<DataModel> getComposites();
+
 }

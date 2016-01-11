@@ -15,39 +15,29 @@
  */
 package org.geoint.terpene.domain;
 
-import org.geoint.terpene.util.GUID;
+import org.geoint.terpene.TerpeneException;
 
 /**
- * Thrown when an operation could not complete because an addressed Entity
- * instance is unknown to terpene.
+ * Root exception type for all checked exceptions thrown from the entity
+ * management system within terpene.
  *
  * @author steve_siebert
  */
-public class UnknownEntityExcpetion extends DomainException {
+public abstract class DomainException extends TerpeneException {
 
-    private final GUID entityId;
-
-    public UnknownEntityExcpetion(GUID entityId) {
-        this.entityId = entityId;
+    public DomainException() {
     }
 
-    public UnknownEntityExcpetion(GUID entityId, String message) {
+    public DomainException(String message) {
         super(message);
-        this.entityId = entityId;
     }
 
-    public UnknownEntityExcpetion(GUID entityId, String message, Throwable cause) {
+    public DomainException(String message, Throwable cause) {
         super(message, cause);
-        this.entityId = entityId;
     }
 
-    public UnknownEntityExcpetion(GUID entityId, Throwable cause) {
+    public DomainException(Throwable cause) {
         super(cause);
-        this.entityId = entityId;
-    }
-
-    public GUID getEntityId() {
-        return entityId;
     }
 
 }

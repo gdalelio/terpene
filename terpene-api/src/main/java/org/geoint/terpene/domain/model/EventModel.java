@@ -13,31 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geoint.terpene.domain;
-
-import org.geoint.terpene.TerpeneException;
+package org.geoint.terpene.domain.model;
 
 /**
- * Root exception type for all checked exceptions thrown from the entity
- * management system within terpene.
+ * Model of a domain event.
  *
  * @author steve_siebert
+ * @param <T> java class representing the domain event type
  */
-public abstract class EntityException extends TerpeneException {
-
-    public EntityException() {
-    }
-
-    public EntityException(String message) {
-        super(message);
-    }
-
-    public EntityException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public EntityException(Throwable cause) {
-        super(cause);
-    }
+public interface EventModel<T> extends ObjectModel<T> {
 
 }

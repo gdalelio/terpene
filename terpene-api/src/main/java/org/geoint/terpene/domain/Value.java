@@ -22,36 +22,36 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Defines a class as an object representation of a domain Entity.
+ * Defines a java object as one that represents a {@link DomainValue}.
  *
  * @author steve_siebert
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Entity {
+public @interface Value {
 
     /**
-     * Name of the domain this entity type.
+     * Name of the domain this value.
      *
-     * @return domain name of the event
+     * @return domain name
      */
     String domain();
 
     /**
-     * Version(s) of the domain this class represents the entity type.
+     * Version(s) of the domain this class represents the value.
      *
-     * @return domain version for this entity
+     * @return domain version
      */
     String version();
 
     /**
-     * Optional entity type name.
+     * Optional component name for this value component.
      * <p>
-     * If not provided the entity type name is derived from the domain and class
-     * name.
+     * If not provided the value component name is derived from the domain and
+     * class name.
      *
-     * @return entity component name
+     * @return event type
      */
     String name() default "";
 

@@ -1,12 +1,12 @@
 package org.geoint.terpene.platform;
 
 import java.time.ZonedDateTime;
-import org.geoint.terpene.domain.DomainEvent;
+import org.geoint.terpene.domain.Event;
 
 /**
  *
  */
-@DomainEvent(domain = "org.geoint.terpene",
+@Event(domain = "org.geoint.terpene",
         version = "1.0")
 public class PlatformStarted {
 

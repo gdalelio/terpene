@@ -8,25 +8,15 @@
     </parent>
     <artifactId>terpene-api</artifactId>
     <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>org.geoint.version</groupId>
+            <artifactId>geoint-version</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.geoint</groupId>
-            <artifactId>geoint-common</artifactId>
-            <version>0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <version>1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.geoint.canon</groupId>
-            <artifactId>canon-api</artifactId>
-            <version>1.0-BETA</version>
-        </dependency>
-    </dependencies>
 </project>
