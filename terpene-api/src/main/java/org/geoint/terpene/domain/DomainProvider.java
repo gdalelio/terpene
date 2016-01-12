@@ -13,32 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geoint.terpene.domain.repo;
+package org.geoint.terpene.domain;
 
-import java.util.Optional;
-import org.geoint.terpene.domain.DomainEntity;
-import org.geoint.terpene.util.GUID;
+import java.util.ServiceLoader;
+import java.util.stream.Stream;
+import org.geoint.terpene.domain.model.DomainModel;
 
 /**
- * Provides storage and retrieval of current entity instances within a domain.
+ * Provides DomainModel instances.
+ * <p>
+ * Instances of this interface are discovered using a {@link ServiceLoader}.
  *
  * @author steve_siebert
- * @param <T>
  */
-public interface EntityRepository<T> {
+public interface DomainProvider {
 
     /**
-     * Retrieve the latest version of a specific entity instance.
+     * Return a stream of domain models.
      *
-     * @param id entity instance identifier
-     * @return entity instance, if found
+     * @return domain models
      */
-    Optional<DomainEntity<T>> find(GUID id);
-
-    /**
-     * Build a entity query.
-     *
-     * @return entity query
-     */
-    EntityQuery<T> query();
+    Stream<DomainModel> stream();
 }
