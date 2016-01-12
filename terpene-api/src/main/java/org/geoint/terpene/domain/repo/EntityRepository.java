@@ -37,5 +37,5 @@ public interface EntityRepository<T> {
      */
     Optional<DomainEntity<T>> find(GUID id);
 
-    EntityQuery<T> find ();
+    EntityQuery<T> query ();
 }
