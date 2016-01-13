@@ -17,9 +17,11 @@ package org.geoint.terpene.domain.repo;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
+import org.geoint.terpene.domain.DomainEntity;
 import org.geoint.terpene.domain.model.DataModel;
 
 /**
@@ -54,14 +56,14 @@ public interface EntityQuery<T> {
 
     <V> EntityQuery<T> matches(DataModel<V> model, Pattern pattern);
 
-    EntityQuery<T> sort(Comparator<T> sort);
+    EntityQuery<T> sort(Comparator<DomainEntity<T>> sort);
 
-    EntityQuery<T> filter(Predicate<T> filter);
+    EntityQuery<T> filter(Predicate<DomainEntity<T>> filter);
 
-    void forEach(Consumer<T> consumer);
+    void forEach(Consumer<DomainEntity<T>> consumer);
 
-    T first();
+    Optional<DomainEntity<T>> first();
 
-    Collection<T> get();
+    Collection<DomainEntity<T>> get();
 
 }

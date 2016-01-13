@@ -16,6 +16,7 @@
 package org.geoint.terpene.domain.repo;
 
 import java.util.stream.Stream;
+import org.geoint.version.Version;
 
 /**
  * Provides EntityRepository instances.
@@ -26,6 +27,19 @@ import java.util.stream.Stream;
  * @author steve_siebert
  */
 public interface RepositoryProvider {
+
+    /**
+     * Retrieve a stream of repositories that (potentially) provide access to
+     * entities of the provided type.
+     *
+     * @param domainName entity domain
+     * @param version entity/domain version
+     * @param entityType entity name
+     * @return stream of repositories containing zero or more matching
+     * repositories
+     */
+    Stream<EntityRepository> stream(String domainName, Version version,
+            String entityType);
 
     /**
      * A stream of repositories available from the provider instance.

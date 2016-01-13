@@ -15,7 +15,9 @@
  */
 package org.geoint.terpene.domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.ServiceLoader;
 import org.geoint.terpene.domain.model.DomainModel;
@@ -42,7 +44,9 @@ public final class Domains {
      * @return known application domain models
      */
     public static Collection<DomainModel> getModels() {
-        
+        Collection<DomainModel> models = new ArrayList<>();
+        providers.forEach((p) -> p.stream().forEach(models::add));
+        return models;
     }
 
     /**
@@ -54,6 +58,42 @@ public final class Domains {
      */
     public static Optional<DomainModel> findModel(String domainName,
             Version domainVersion) {
+        Iterator<DomainProvider> pi = providers.iterator();
+        while (pi.hasNext()) {
+            DomainProvider p = pi.next();
+            Optional<DomainModel> dm = p.stream()
+                    .filter((m) -> m.getName().contentEquals(domainName)
+                            && domainVersion.isWithin(m.getVersion()))
+                    .findFirst();
+            if (dm.isPresent()) {
+                return dm;
+            }
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Return the domain model for the provided class.
+     * 
+     * @param domainClass java class that represents a domain component
+     * @return associated domain model, if discoverable, or null
+     */
+    public static DomainModel getModel(Class<?> domainClass)
+            throws UnknownComponentException, NotDomainClassException {
+        
+        String domainName = null;
+        Version domainVersion = null;
+        
+        //first check for @Domain
+        
+        
+        //now check for more specific domain annotations (object, value, 
+        //entity, event) that may override information in @Domain
+        
+        //set defaults if not explicitly set by annotation attributes
+        
         
     }
+    
+    
 }
