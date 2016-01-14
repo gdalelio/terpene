@@ -15,7 +15,7 @@
  */
 package org.geoint.terpene.domain.model;
 
-import org.geoint.version.Version;
+import org.geoint.terpene.domain.Version;
 
 /**
  * Model of a domain component that observes (handles) domain events.

@@ -1,8 +1,8 @@
 
-package terpene.user;
+package org.geoint.terpene.user;
 
 import java.io.Serializable;
-import terpene.user.contact.ContactInfo;
+import org.geoint.terpene.user.contact.ContactInfo;
 
 /**
  *

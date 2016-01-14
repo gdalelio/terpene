@@ -13,22 +13,23 @@
     </properties>
     
     <modules>
-        <!-- core terpene modules -->
+        <!-- terpene component interfaces -->
         <module>terpene-api</module>
-        <module>terpene-cdi</module>
         <module>terpene-spi</module>
-        <module>terpene-core</module>
         
-        <!-- Official terpene libraries and tools -->
+        <module>terpene-config-api</module>
+        <module>terpene-blob-api</module>
+        
+        <!-- implementations -->
+        <module>terpene-core</module>
+        <module>terpene-cdi</module>
+        <module>terpene-platform-jvm</module>
+        <module>terpene-mvnsite</module>
         <module>terpene-rest-client</module>
         <module>terpene-cli</module>
         
         <!-- Example/demo code -->
         <module>terpene-demo-component</module>
-        
-        <!-- Official platform implementations -->
-        <module>terpene-platform-jvm</module>
-        <module>terpene-mvnsite</module>
     </modules>
     
      

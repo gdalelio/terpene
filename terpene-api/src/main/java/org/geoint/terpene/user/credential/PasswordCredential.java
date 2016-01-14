@@ -1,5 +1,5 @@
 
-package terpene.user.credential;
+package org.geoint.terpene.user.credential;
 
 /**
  *

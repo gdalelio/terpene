@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 geoint.org.
+ * Copyright 2016 geoint.org.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package org.geoint.terpene.service;
-
-import org.geoint.acetate.domain.entity.Entity;
-import org.geoint.terpene.component.TerpeneComponent;
-
+package org.geoint.terpene.domain;
 
 /**
- * 
+ *
  * @author steve_siebert
- * @param <S> service interface
- * @param <C> component instance type
  */
-@Entity(name="service")
-public interface TerpeneService<S, C extends S> extends TerpeneComponent<C>{
-
-    Class<S> getServiceType();
+public enum VersionQualifier {
+    
+    DEV,
+    ALPHA,
+    BETA,
+    PROD;
+    
 }

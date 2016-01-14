@@ -1,5 +1,5 @@
 
-package terpene.user;
+package org.geoint.terpene.user;
 
 /**
  *

@@ -15,7 +15,7 @@
  */
 package org.geoint.terpene.domain;
 
-import org.geoint.version.Version;
+import org.geoint.terpene.domain.Version;
 
 /**
  * Thrown if a {@link EventHandler} does not support the event type submitted to

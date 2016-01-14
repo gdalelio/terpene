@@ -1,4 +1,4 @@
-package terpene.user.contact;
+package org.geoint.terpene.user.contact;
 
 import java.io.Serializable;
 import java.util.Set;

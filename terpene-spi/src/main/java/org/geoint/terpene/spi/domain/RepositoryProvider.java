@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geoint.terpene.domain.repo;
+package org.geoint.terpene.spi.domain;
 
 import java.util.stream.Stream;
+import org.geoint.terpene.domain.repo.EntityRepository;
 import org.geoint.version.Version;
 
 /**

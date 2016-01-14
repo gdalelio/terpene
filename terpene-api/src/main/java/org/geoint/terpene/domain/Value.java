@@ -20,6 +20,8 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import org.geoint.terpene.domain.codec.BinaryCodec;
+import org.geoint.terpene.domain.codec.CharCodec;
 
 /**
  * Defines a java object as one that represents a {@link DomainValue}.
@@ -64,4 +66,18 @@ public @interface Value {
      */
     String desc() default "";
 
+    /**
+     * Default CharCodec to use to serialize the Value object as a string.
+     *
+     * @return codec class or interface, indicating no default codec
+     */
+    Class<? extends CharCodec> charCodec() default CharCodec.class;
+
+    /**
+     * Default BinaryCodec to use to serialize the Value object as a binary
+     * representation.
+     *
+     * @return codec class or interface, indicating no default codec
+     */
+    Class<? extends BinaryCodec> binCodec() default BinaryCodec.class;
 }

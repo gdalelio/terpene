@@ -13,15 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geoint.terpene.domain;
+package org.geoint.terpene.impl.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.ServiceLoader;
+import org.geoint.terpene.spi.domain.DomainProvider;
+import org.geoint.terpene.domain.NotDomainClassException;
+import org.geoint.terpene.domain.UnknownComponentException;
 import org.geoint.terpene.domain.model.DomainModel;
-import org.geoint.version.Version;
+import org.geoint.terpene.domain.Version;
 
 /**
  * Programmatic retrieve of application domain models.

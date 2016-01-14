@@ -1,5 +1,5 @@
 
-package terpene.user.contact;
+package org.geoint.terpene.user.contact;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;

@@ -16,7 +16,7 @@
 package org.geoint.terpene.domain.model;
 
 import java.util.Collection;
-import org.geoint.version.Version;
+import org.geoint.terpene.domain.Version;
 
 /**
  * The model of an application domain.

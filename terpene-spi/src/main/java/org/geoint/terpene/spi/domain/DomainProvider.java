@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 geoint.org.
+ * Copyright 2016 geoint.org.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,9 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.geoint.terpene.spi.domain;
 
-@Domain(domain="org.geoint.terpene", domainVersion="1.0-BETA")
-package org.geoint.terpene.platform;
+import java.util.ServiceLoader;
+import java.util.stream.Stream;
+import org.geoint.terpene.domain.model.DomainModel;
 
-import org.geoint.acetate.domain.annotation.Domain;
+/**
+ * Provides DomainModel instances.
+ * <p>
+ * Instances of this interface are discovered using a {@link ServiceLoader}.
+ *
+ * @author steve_siebert
+ */
+public interface DomainProvider {
 
+    /**
+     * Return a stream of domain models.
+     *
+     * @return domain models
+     */
+    Stream<DomainModel> stream();
+}

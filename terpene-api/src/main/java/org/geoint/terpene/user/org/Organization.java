@@ -1,5 +1,5 @@
 
-package terpene.user.org;
+package org.geoint.terpene.user.org;
 
 import java.io.Serializable;
 

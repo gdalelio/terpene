@@ -13,25 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geoint.terpene.domain;
-
-import java.util.ServiceLoader;
-import java.util.stream.Stream;
-import org.geoint.terpene.domain.model.DomainModel;
+package org.geoint.terpene.domain.codec;
 
 /**
- * Provides DomainModel instances.
- * <p>
- * Instances of this interface are discovered using a {@link ServiceLoader}.
+ * A piece of code that converts/inverts terpene domain data objects to
+ * serialized string.
  *
  * @author steve_siebert
  */
-public interface DomainProvider {
+public interface BinaryCodec {
 
-    /**
-     * Return a stream of domain models.
-     *
-     * @return domain models
-     */
-    Stream<DomainModel> stream();
 }

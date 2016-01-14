@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 geoint.org.
+ * Copyright 2016 geoint.org.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,17 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geoint.terpene.service;
+package org.geoint.terpene.domain.codec;
+
+import org.geoint.terpene.TerpeneException;
 
 /**
- * Meta details about a terpene service component contract.
- * 
+ * Thrown if a domain codec could not be used in context.
+ *
  * @author steve_siebert
  */
-public final class ServiceContract {
-    
-    private final String name;
-    private final ComponentVersion version;
-    
-    
+public class InvalidCodecException extends TerpeneException {
+
+    public InvalidCodecException() {
+    }
+
+    public InvalidCodecException(String message) {
+        super(message);
+    }
+
+    public InvalidCodecException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public InvalidCodecException(Throwable cause) {
+        super(cause);
+    }
+
 }
