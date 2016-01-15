@@ -21,6 +21,9 @@ package org.geoint.terpene.domain;
  */
 public enum VersionQualifier {
     
+    /*
+     * NOTE: Ordinal sequence is important.
+    */
     DEV,
     ALPHA,
     BETA,
