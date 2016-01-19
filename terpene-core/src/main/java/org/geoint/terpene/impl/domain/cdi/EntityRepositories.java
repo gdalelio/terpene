@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geoint.terpene.cdi.entity;
+package org.geoint.terpene.impl.domain.cdi;
 
 import java.util.Map;
 import java.util.logging.Level;

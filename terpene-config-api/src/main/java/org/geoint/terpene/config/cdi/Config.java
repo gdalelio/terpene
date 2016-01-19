@@ -1,4 +1,4 @@
-package org.geoint.terpene.cdi.config;
+package org.geoint.terpene.config.cdi;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
