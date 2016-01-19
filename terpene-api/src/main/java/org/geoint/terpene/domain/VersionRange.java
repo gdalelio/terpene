@@ -74,12 +74,7 @@ public final class VersionRange {
         if (!m.find()) {
             return null;
         }
-
-        int count = m.groupCount();
-        for (int i = 0; i <= count; i++) {
-            System.out.println(String.format("%d\t%s", i, m.group(i)));
-        }
-
+        
         try {
 
             boolean startInclusive = m.group(1).contentEquals(START_INCLUSIVE);
