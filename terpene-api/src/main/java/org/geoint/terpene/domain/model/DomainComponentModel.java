@@ -16,7 +16,7 @@
 package org.geoint.terpene.domain.model;
 
 import java.util.Optional;
-import org.geoint.terpene.domain.Version;
+import org.geoint.terpene.domain.VersionRange;
 
 /**
  * A model defined by a domain.
@@ -37,7 +37,7 @@ public interface DomainComponentModel {
      *
      * @return domain version
      */
-    Version getDomainVersion();
+    VersionRange getDomainVersion();
 
     /**
      * Unique domain component name.

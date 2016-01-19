@@ -13,13 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geoint.terpene.domain.util;
+package org.geoint.terpene.domain.model;
+
+import org.geoint.terpene.domain.DomainException;
 
 /**
- * Reflection utility methods to derive domain metamodel information.
- * 
+ * Thrown if the domain model definition of a component, or the model itself, is
+ * invalid.
+ *
  * @author steve_siebert
  */
-public class DomainReflection {
-    
+public class InvalidDomainException extends DomainException {
+
+    public InvalidDomainException() {
+    }
+
+    public InvalidDomainException(String message) {
+        super(message);
+    }
+
+    public InvalidDomainException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public InvalidDomainException(Throwable cause) {
+        super(cause);
+    }
+
 }

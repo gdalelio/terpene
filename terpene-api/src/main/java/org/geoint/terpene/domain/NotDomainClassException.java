@@ -16,8 +16,8 @@
 package org.geoint.terpene.domain;
 
 /**
- * Thrown if a class is used as a representation of a domain model component,
- * but the class is not defined as a member of a domain.
+ * Thrown if a class is attempted to be used as a domain model component, but
+ * the domain model or component model could not be resolved.
  *
  * @author steve_siebert
  */
