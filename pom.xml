@@ -20,9 +20,6 @@
         <module>terpene-api</module>
         <module>terpene-spi</module>
         
-        <module>terpene-config-api</module>
-        <module>terpene-blob-api</module>
-        
         <!-- implementations -->
         <module>terpene-core</module>
         <module>terpene-platform-jvm</module>
