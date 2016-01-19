@@ -34,20 +34,6 @@ import org.geoint.terpene.domain.codec.CharCodec;
 public @interface Value {
 
     /**
-     * Name of the domain this value.
-     *
-     * @return domain name
-     */
-    String domain();
-
-    /**
-     * Version(s) of the domain this class represents the value.
-     *
-     * @return domain version
-     */
-    String version();
-
-    /**
      * Optional component name for this value component.
      * <p>
      * If not provided the value component name is derived from the domain and

@@ -22,7 +22,7 @@ import org.geoint.terpene.domain.Version;
  * 
  * @author steve_siebert
  */
-public interface HandlerModel {
+public interface HandlerModel extends DomainComponentModel {
     
     
     /**

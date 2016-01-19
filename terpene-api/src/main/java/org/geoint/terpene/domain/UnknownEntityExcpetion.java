@@ -15,7 +15,7 @@
  */
 package org.geoint.terpene.domain;
 
-import org.geoint.terpene.util.GUID;
+import org.geoint.terpene.GUID;
 
 /**
  * Thrown when an operation could not complete because an addressed Entity

@@ -19,7 +19,7 @@ import org.geoint.terpene.domain.model.EntityModel;
 import java.util.Optional;
 import org.geoint.terpene.domain.model.HandlerModel;
 import org.geoint.terpene.domain.model.OperationModel;
-import org.geoint.terpene.util.GUID;
+import org.geoint.terpene.GUID;
 
 /**
  * Instance of a domain entity.

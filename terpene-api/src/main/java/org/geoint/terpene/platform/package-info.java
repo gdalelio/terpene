@@ -13,29 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geoint.terpene.domain.model;
+@Domain(domain = "terpene", version = "(,2.0)")
+package org.geoint.terpene.platform;
 
-import java.util.Collection;
-
-/**
- * Model of a domain operation.
- *
- * @author steve_siebert
- */
-public interface OperationModel extends DomainComponentModel {
-
-    /**
-     * Model of the operation parameters.
-     *
-     * @return operation parameters, if none returns an empty collection
-     */
-    Collection<ObjectModel> getParameters();
-
-    /**
-     * Model of the domain event created on successful execution of the
-     * operation.
-     *
-     * @return model of event resulting from successful execution
-     */
-    EventModel getReturn();
-}
+import org.geoint.terpene.domain.Domain;

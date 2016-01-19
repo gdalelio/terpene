@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
  *
  * @author steve_siebert
  */
+@Value(name="versionRange", desc = "a range of versions")
 public final class VersionRange {
 
     private final boolean startInclusive;

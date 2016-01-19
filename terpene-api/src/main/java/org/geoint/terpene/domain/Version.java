@@ -34,8 +34,7 @@ import org.geoint.terpene.domain.codec.CharCodec;
  *
  * @author steve_siebert
  */
-@Value(domain = "terpene", version = "[0.1,)",
-        charCodec = VersionStringCodec.class)
+@Value(charCodec = VersionStringCodec.class)
 public final class Version implements Comparable<Version> {
 
     private final Integer major;

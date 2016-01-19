@@ -18,4 +18,5 @@
  * Components written to run on the terpene platform generally revolve 
  * around an application domain model.  
  */
+@Domain(domain = "terpene", version = "(,2.0)")
 package org.geoint.terpene.domain;
