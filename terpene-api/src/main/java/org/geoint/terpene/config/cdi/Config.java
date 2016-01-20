@@ -69,7 +69,7 @@ public @interface Config {
      * Optional usage description that explains how the configuration property
      * is used in the specific point of use.
      *
-     * @return
+     * @return explains how the configuration property is being used
      */
     @Nonbinding
     String usage() default "";

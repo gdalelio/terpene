@@ -28,14 +28,14 @@ public interface HandlerModel extends DomainComponentModel {
     /**
      * Domain name of the handled event.
      * 
-     * @return 
+     * @return the domain name of the event
      */
     String getEventDomain();
     
     /**
      * Domain version of the handled event.
      * 
-     * @return 
+     * @return the domain version of the event
      */
     Version getEventVersion();
     

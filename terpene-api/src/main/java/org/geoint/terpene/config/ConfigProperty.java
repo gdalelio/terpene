@@ -6,7 +6,6 @@ import java.util.Collection;
  * Thread-safe hierarchical multivalued configuration property.
  *
  * @param <T> configuration property value type
- * @see ConfigPropertyArray
  */
 public interface ConfigProperty<T> {
 
@@ -26,14 +25,6 @@ public interface ConfigProperty<T> {
      * @return the unique name of the configuration property
      */
     String getName();
-
-    /**
-     * Return the priority value of the {@link ConfigStore} from which the value
-     * of this property is derived.
-     *
-     * @return
-     */
-    int getPriority();
 
     /**
      * Returns if this property instance is the <i>derived</i> property

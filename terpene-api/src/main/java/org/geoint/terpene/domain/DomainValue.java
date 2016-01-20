@@ -38,16 +38,16 @@ public interface DomainValue<T> extends DomainData<T> {
     /**
      * Writes the value as a UTF-8 string to the stream.
      *
-     * @param out
-     * @throws IOException
+     * @param out stream to write value as a UTF-8 string
+     * @throws IOException thrown if there is a problem writing to the stream
      */
     void writeString(PrintStream out) throws IOException;
 
     /**
      * Writes the value as bytes to the output stream.
      *
-     * @param out
-     * @throws IOException
+     * @param out stream to write value as an array of bytes
+     * @throws IOException thrown if there is a problem writing to the stream
      */
     void writeBytes(OutputStream out) throws IOException;
 }

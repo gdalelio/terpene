@@ -17,9 +17,10 @@ package org.geoint.terpene.domain;
 
 import org.geoint.terpene.domain.model.EntityModel;
 import java.util.Optional;
+import org.geoint.terpene.GUID;
 import org.geoint.terpene.domain.model.HandlerModel;
 import org.geoint.terpene.domain.model.OperationModel;
-import org.geoint.terpene.GUID;
+import org.geoint.terpene.domain.model.DataModel;
 
 /**
  * Instance of a domain entity.

@@ -122,6 +122,17 @@ public final class Version implements Comparable<Version> {
         return qualifier;
     }
 
+    @Override
+    public int compareTo(Version o) {
+        int compare = 0;
+        Iterator<Function<Version, Integer>> suppliers = compareSuppliers.iterator();
+        while (suppliers.hasNext() && compare == 0) {
+            Function<Version, Integer> supplier = suppliers.next();
+            compare = supplier.apply(this).compareTo(supplier.apply(o));
+        }
+        return compare;
+    }
+    
     /**
      *
      * @return string
@@ -139,16 +150,6 @@ public final class Version implements Comparable<Version> {
             = Arrays.asList(Version::getMajor, Version::getMinor,
                     Version::getIncrement, (v) -> v.getQualifier().ordinal());
 
-    @Override
-    public int compareTo(Version o) {
-        int compare = 0;
-        Iterator<Function<Version, Integer>> suppliers = compareSuppliers.iterator();
-        while (suppliers.hasNext() && compare == 0) {
-            Function<Version, Integer> supplier = suppliers.next();
-            compare = supplier.apply(this).compareTo(supplier.apply(o));
-        }
-        return compare;
-    }
 
     private static String format(Integer major, Integer minor,
             Integer increment, VersionQualifier qualifier) {

@@ -23,7 +23,7 @@ import org.geoint.terpene.GUID;
  * Provides storage and retrieval of current entity instances within a domain.
  *
  * @author steve_siebert
- * @param <T>
+ * @param <T> java type representing the domain entity
  */
 public interface EntityRepository<T> {
 

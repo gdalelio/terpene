@@ -14,10 +14,9 @@ import java.io.Serializable;
 public interface BlobId extends Serializable {
 
     /**
-     * Returns the blobId as a UUID string in the canonical representation
-     * {@code xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx}.
+     * Blob ID as a string.
      *
-     * @return
+     * @return blob identifier as a String
      */
     public String asString();
 

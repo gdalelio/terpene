@@ -45,8 +45,8 @@ public interface BinaryCodec<T> {
      * @param in binary stream
      * @return domain component instance, may return null
      * @throws IOException thrown if there was a problem reading from the stream
-     * @thrown InvalidCodecException thrown if the codec cannot convert the
-     * stream to an domain component instance
+     * @throws org.geoint.terpene.domain.codec.InvalidCodecException thrown if
+     * the codec cannot convert the stream to an domain component instance
      */
     T read(InputStream in) throws IOException, InvalidCodecException;
 }

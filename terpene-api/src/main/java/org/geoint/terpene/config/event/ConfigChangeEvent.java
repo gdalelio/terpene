@@ -1,5 +1,7 @@
 package org.geoint.terpene.config.event;
 
+import org.geoint.terpene.config.ConfigProperty;
+
 /**
  * Fired (via CDI) when a configuration property value has been changed.
  *

@@ -3,11 +3,12 @@ package org.geoint.terpene.blob;
 import java.io.InputStream;
 import org.geoint.terpene.blob.reservation.ReservationConstraints;
 import org.geoint.terpene.blob.quota.BlobQuotaException;
+import org.geoint.terpene.domain.repo.EntityRepository;
 
 /**
  * Service interface to interact with a blob store.
  */
-public interface BlobService {
+public interface BlobRepository extends EntityRepository<Blob> {
 
     /**
      * Reserve a blob in the requesters default bucket.
@@ -63,10 +64,6 @@ public interface BlobService {
 
     /**
      * Check if the blob, or a reservation for a blob, exists in the store.
-     *
-     * This skips instantiating a Blob instance, so is a preferred approach than
-     * checking the results from {@link #find() } if all that is needed to see
-     * if the blob exists.
      *
      * @param id blob id
      * @return true if the blob has been reserved/exists

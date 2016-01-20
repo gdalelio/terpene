@@ -19,7 +19,7 @@ package org.geoint.terpene.security.lbac;
  * An LBAC-controlled domain component.
  *
  * @author steve_siebert
- * @param <T>
+ * @param <T> labeled java type
  */
 public interface Labeled<T> {
 
@@ -41,7 +41,7 @@ public interface Labeled<T> {
      * Default String representation of the LBAC controlled domain component.
      * <p>
      * This method assumes that the domain component class implements a
-     * reasonable {@link #toString() } method.
+     * reasonable {@link Object#toString() } method.
      *
      * @return labeled component as string
      */
@@ -50,5 +50,5 @@ public interface Labeled<T> {
                 this.getLabel(),
                 this.getValue().toString());
     }
-    
+
 }

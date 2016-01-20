@@ -45,8 +45,8 @@ public interface CharCodec<T> {
      * @param reader character stream
      * @return domain component instance, may return null
      * @throws IOException thrown if there was a problem reading from the stream
-     * @thrown InvalidCodecException thrown if the codec cannot convert the
-     * stream to an domain component instance
+     * @throws org.geoint.terpene.domain.codec.InvalidCodecException thrown if
+     * the codec cannot convert the stream to an domain component instance
      */
     T read(Reader reader) throws IOException, InvalidCodecException;
 
