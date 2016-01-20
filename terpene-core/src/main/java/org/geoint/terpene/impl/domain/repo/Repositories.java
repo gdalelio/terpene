@@ -28,13 +28,17 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.geoint.terpene.domain.DomainEntity;
 import org.geoint.terpene.domain.model.DataModel;
 import org.geoint.terpene.domain.repo.EntityQuery;
 import org.geoint.terpene.domain.repo.EntityRepository;
 import org.geoint.terpene.spi.domain.RepositoryProvider;
-import org.geoint.terpene.util.GUID;
-import org.geoint.version.Version;
+import org.geoint.terpene.GUID;
+import org.geoint.terpene.domain.Version;
+import org.geoint.terpene.domain.model.InvalidDomainException;
+import org.geoint.terpene.impl.domain.DomainComponentIdentity;
+import org.geoint.terpene.impl.domain.DomainReflection;
 
 /**
  * Programmatic retrieval of available entity repositories.
@@ -47,10 +51,20 @@ import org.geoint.version.Version;
  * @see EntityRepository
  * @author steve_siebert
  */
-public final class Repositories {
+public enum Repositories {
 
-    private static final ServiceLoader<RepositoryProvider> providers
-            = ServiceLoader.load(RepositoryProvider.class);
+    INSTANCE;
+
+    private static final Collection<RepositoryProvider> providers;
+
+    static {
+        providers = new ArrayList<>();
+
+        //load all repositories
+        ServiceLoader.load(RepositoryProvider.class)
+                .forEach(Repositories::addProvider);
+
+    }
 
     /**
      * Retrieve an entity repository that queries all relevant repositories,
@@ -61,7 +75,7 @@ public final class Repositories {
      * @param entityName
      * @return proxy of all known relevant repositories
      */
-    public static EntityRepository<?> all(String domainName,
+    public EntityRepository<?> all(String domainName,
             Version domainVersion, String entityName) {
         MultiRepository multi = new MultiRepository();
         providers.forEach((p) -> {
@@ -72,18 +86,6 @@ public final class Repositories {
     }
 
     /**
-     * Retrieve an entity repository that queries all relevant repositories,
-     * returning the latest version of the entity from the repositories.
-     *
-     * @param <T> java representation of a domain entity
-     * @param entityClass domain entity class
-     * @return proxy of all known relevant repositories
-     */
-    public static <T> EntityRepository<T> all(Class<T> entityClass) {
-        
-    }
-
-    /**
      * Retrieve an entity repository for this entity.
      *
      * @param domainName
@@ -91,50 +93,33 @@ public final class Repositories {
      * @param entityName
      * @return
      */
-    public static EntityRepository<?> any(String domainName,
+    public Optional<EntityRepository> any(String domainName,
             Version domainVersion, String entityName) {
-
+        return providers.stream()
+                .flatMap((p) -> p.stream(domainName, domainVersion, entityName))
+                .findAny();
     }
 
     /**
-     * Retrieve an entity repository for this entity.
+     * Stream of entity repositories.
+     * <p>
+     * Since the stream contains all repositories known to terpene, the stream
+     * may return multiple repositories for each entity type.
      *
-     * @param <T>
-     * @param entityClass
      * @return
      */
-    public static <T> EntityRepository<T> any(Class<T> entityClass) {
-
+    public Stream<EntityRepository> stream() {
+        return providers.stream()
+                .flatMap(RepositoryProvider::stream);
     }
 
     /**
-     * Filter the available entity repositories returning a specific repository
-     * implementation.
+     * Adds a repository to the collection of known repositories.
      *
-     * @param domainName
-     * @param domainVersion
-     * @param entityName
-     * @param filter
-     * @return
+     * @param r
      */
-    public static EntityRepository select(String domainName,
-            Version domainVersion, String entityName,
-            Predicate<EntityRepository> filter) {
-
-    }
-
-    /**
-     * Filter the available entity repositories returning a specific repository
-     * implementation.
-     *
-     * @param <T>
-     * @param entityClass
-     * @param filter
-     * @return
-     */
-    public static <T> EntityRepository<T> select(Class<T> entityClass,
-            Predicate<EntityRepository<T>> filter) {
-
+    private static void addProvider(RepositoryProvider p) {
+        providers.add(p);
     }
 
     /**
@@ -169,8 +154,8 @@ public final class Repositories {
             for (EntityRepository<T> r : this.repos) {
                 Optional<DomainEntity<T>> e = r.find(id);
                 if (entity != null
-                        && e.isPresent()
-                        && entity.getVersion().isLessThan(e.get().getVersion())) {
+                        && e.isPresent() //                        && entity.getVersion().isLessThan(e.get().getVersion())
+                        ) {
                     entity = e.get();
                 }
             }
@@ -198,6 +183,37 @@ public final class Repositories {
             this.queries = repos.stream()
                     .map(EntityRepository::query)
                     .collect(Collectors.toList());
+        }
+
+        @Override
+        public Optional<DomainEntity<T>> first() {
+            DomainEntity<T> result = null;
+            for (EntityQuery<T> q : queries) {
+                Optional<DomainEntity<T>> e = q.first();
+                if (e.isPresent()) {
+                    if (result == null) {
+                        result = e.get();
+//                    } else if (result.getVersion().isLessThan(e.get().getVersion())) {
+//                        result = e.get();
+                    }
+                }
+            }
+            return Optional.ofNullable(result);
+        }
+
+        @Override
+        public Collection<DomainEntity<T>> get() {
+            final Map<GUID, DomainEntity<T>> results = new HashMap<>(); //key is entity id
+
+            queries.forEach((q) -> q.forEach((e) -> {
+                GUID id = e.getId();
+                //results contain only the newest version of the entity found
+                if (!results.containsKey(id) //                        || results.get(id).getVersion().isLessThan(e.getVersion())
+                        ) {
+                    results.put(id, e);
+                }
+            }));
+            return results.values();
         }
 
         @Override
@@ -292,37 +308,6 @@ public final class Repositories {
 
             //we have the latest entity version(s), execute the callback
             results.forEach(consumer);
-        }
-
-        @Override
-        public Optional<DomainEntity<T>> first() {
-            DomainEntity<T> result = null;
-            for (EntityQuery<T> q : queries) {
-                Optional<DomainEntity<T>> e = q.first();
-                if (e.isPresent()) {
-                    if (result == null) {
-                        result = e.get();
-                    } else if (result.getVersion().isLessThan(e.get().getVersion())) {
-                        result = e.get();
-                    }
-                }
-            }
-            return Optional.ofNullable(result);
-        }
-
-        @Override
-        public Collection<DomainEntity<T>> get() {
-            final Map<GUID, DomainEntity<T>> results = new HashMap<>(); //key is entity id
-
-            queries.forEach((q) -> q.forEach((e) -> {
-                GUID id = e.getId();
-                //results contain only the newest version of the entity found
-                if (!results.containsKey(id)
-                        || results.get(id).getVersion().isLessThan(e.getVersion())) {
-                    results.put(id, e);
-                }
-            }));
-            return results.values();
         }
 
     }

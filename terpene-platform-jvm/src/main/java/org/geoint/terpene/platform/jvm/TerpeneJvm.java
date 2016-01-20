@@ -23,6 +23,18 @@ public class TerpeneJvm {
     private static final String PROPERTY_LIB = "org.geoint.terpene.lib.dir";
     
     public static void main (String... args) {
-        
+//        //TODO start the container if it hasn't already been started
+//        JettyWarComponent warComponent = (JettyWarComponent) component;
+//        final File warFile = warComponent.getWarFile();
+//        final File componentDir = newComponentDir(warComponent);
+//        final Integer port = newPort();
+//
+//        ProcessBuilder pb = new ProcessBuilder("java org.geoint.terpene.jetty.war.JettyWarProcess",
+//                JettyWarProcess.CLI_WAR_FILE, warFile.getAbsolutePath(),
+//                JettyWarProcess.CLI_PORT, port.toString(),
+//                JettyWarProcess.CLI_EXTRACT, componentDir.getAbsolutePath());
+//        pb.directory(componentDir);
+////        pb.redirectError(ProcessBuilder.Redirect.INHERIT);
+////        pb.redirectError(ProcessBuilder.Redirect.INHERIT);
     }
 }

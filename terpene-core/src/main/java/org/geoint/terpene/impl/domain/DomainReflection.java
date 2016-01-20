@@ -22,6 +22,8 @@ import java.util.logging.Logger;
 import org.geoint.terpene.domain.Domain;
 import org.geoint.terpene.domain.Entity;
 import org.geoint.terpene.domain.Event;
+import org.geoint.terpene.domain.Handles;
+import org.geoint.terpene.domain.Operation;
 import org.geoint.terpene.domain.Value;
 import org.geoint.terpene.domain.model.InvalidDomainException;
 
@@ -63,6 +65,14 @@ public final class DomainReflection {
                     + "for class '%s'", domainClass.getCanonicalName());
             return Optional.empty();
         }
+        
+        if (domainClass.isAnnotationPresent(Entity.class)) {
+            return Optional.of(new DomainComponentIdentity(domain, domainClass.getAnnotation(Entity.class)));
+        } else if (domainClass.isAnnotationPresent(Event.class)) {
+            return Optional.of(new DomainComponentIdentity(domain, domainClass.getAnnotation(Event.class)));
+        } else if (domainClass.isAnnotationPresent(Value.class)) {
+            return Optional.of(new DomainComponentIdentity(domain, domainClass.getAnnotation(Value.class)));
+        }
 
         return Optional.of(new DomainIdentity(domain));
     }
@@ -76,8 +86,18 @@ public final class DomainReflection {
      * @throws InvalidDomainException thrown if the domain annotations define an
      * invalid domain model
      */
-    public static Optional<DomainIdentity> identify(Method domainMethod)
+    public static Optional<DomainComponentIdentity> identify(Method domainMethod)
             throws InvalidDomainException {
-        return identify(domainMethod.getDeclaringClass());
+        DomainIdentity id = identify(domainMethod.getDeclaringClass())
+                .orElseThrow(() -> new InvalidDomainException("Domain is not specified "
+                + "for the method."));
+        
+        if(domainMethod.isAnnotationPresent(Operation.class)) {
+            return Optional.of(new DomainComponentIdentity(id, domainMethod.getAnnotation(Operation.class)));
+        } else if (domainMethod.isAnnotationPresent(Handles.class)) {
+            return Optional.of(new DomainComponentIdentity(id, domainMethod.getAnnotation(Handles.class)));
+        }
+        return Optional.empty();
     }
+    
 }

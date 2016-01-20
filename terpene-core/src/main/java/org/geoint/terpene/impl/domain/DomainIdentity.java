@@ -25,7 +25,7 @@ import org.geoint.terpene.domain.model.InvalidDomainException;
  *
  * @author steve_siebert
  */
-public final class DomainIdentity {
+public class DomainIdentity {
 
     private final String domainName;
     private final VersionRange version;

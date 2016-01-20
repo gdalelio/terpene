@@ -40,32 +40,17 @@ import org.geoint.terpene.domain.model.OperationModel;
  * @see OperationModel
  * @author steve_siebert
  */
-public final class DomainComponentIdentity {
+public class DomainComponentIdentity extends DomainIdentity {
 
-    private final String domainName;
-    private final VersionRange domainVersion;
     private final String componentName;
 
     private DomainComponentIdentity(String domainName,
             String domainVersion, String componentName)
             throws InvalidDomainException {
-        if (domainName == null) {
-            throw new InvalidDomainException("Invalid domain component identity, "
-                    + "domain name is required.");
-        }
-        if (domainVersion == null) {
-            throw new InvalidDomainException("Invalid domain component identitiy, "
-                    + "domain version is required.");
-        }
+        super(domainName, VersionRange.valueOf(domainVersion));
         if (componentName == null) {
             throw new InvalidDomainException("Invalid domain component identity,"
                     + "component name is required.");
-        }
-        this.domainName = domainName;
-        this.domainVersion = VersionRange.valueOf(domainVersion);
-        if (this.domainVersion == null) {
-            throw new InvalidDomainException("Invalid domain component identitiy, "
-                    + "domain version is not valid.");
         }
         this.componentName = componentName;
     }
@@ -90,17 +75,21 @@ public final class DomainComponentIdentity {
         this(domain.domain(), domain.version(), operation.name());
     }
 
+    public DomainComponentIdentity(DomainIdentity id, Operation operation)
+            throws InvalidDomainException {
+        super(id.getDomainName(), id.getVersion());
+        this.componentName = operation.name();
+    }
+
     public DomainComponentIdentity(Domain domain, Handles handler)
             throws InvalidDomainException {
         this(domain.domain(), domain.version(), handler.name());
     }
 
-    public String getDomainName() {
-        return domainName;
-    }
-
-    public VersionRange getDomainVersion() {
-        return domainVersion;
+    public DomainComponentIdentity(DomainIdentity id, Handles handler)
+            throws InvalidDomainException {
+        super(id.getDomainName(), id.getVersion());
+        this.componentName = handler.name();
     }
 
     public String getComponentName() {
@@ -110,16 +99,16 @@ public final class DomainComponentIdentity {
     @Override
     public String toString() {
         return String.format("%s:%s:%s",
-                domainName,
-                domainVersion.asString(),
+                this.getDomainName(),
+                this.getVersion().asString(),
                 componentName);
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.domainName);
-        hash = 79 * hash + Objects.hashCode(this.domainVersion);
+        hash = 79 * hash + Objects.hashCode(this.getDomainName());
+        hash = 79 * hash + Objects.hashCode(this.getVersion());
         hash = 79 * hash + Objects.hashCode(this.componentName);
         return hash;
     }
@@ -136,13 +125,13 @@ public final class DomainComponentIdentity {
             return false;
         }
         final DomainComponentIdentity other = (DomainComponentIdentity) obj;
-        if (!Objects.equals(this.domainName, other.domainName)) {
+        if (!Objects.equals(this.getDomainName(), other.getDomainName())) {
             return false;
         }
         if (!Objects.equals(this.componentName, other.componentName)) {
             return false;
         }
-        if (!Objects.equals(this.domainVersion, other.domainVersion)) {
+        if (!Objects.equals(this.getVersion(), other.getVersion())) {
             return false;
         }
         return true;

@@ -17,39 +17,55 @@ package org.geoint.terpene.impl.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.ServiceLoader;
+import java.util.Set;
+import java.util.logging.Logger;
 import org.geoint.terpene.spi.domain.DomainProvider;
 import org.geoint.terpene.domain.NotDomainClassException;
 import org.geoint.terpene.domain.UnknownComponentException;
-import org.geoint.terpene.domain.model.DomainModel;
 import org.geoint.terpene.domain.Version;
+import org.geoint.terpene.domain.model.DomainModel;
+import org.geoint.terpene.domain.model.InvalidDomainException;
 
 /**
  * Programmatic retrieve of application domain models.
  * <p>
  * {@link DomainModel Domain models} are loaded from {@link DomainProvider}
  * instances, discovered from a {@link ServiceLoader}.
+ * <p>
+ * Domains does not provide runtime reloading of domain model components,
+ * preventing application code from loading code from untrusted classpaths.
  *
  * @see DomainProvider
  * @see DomainModel
  * @author steve_siebert
  */
-public final class Domains {
+public enum Domains {
 
-    public static final ServiceLoader<DomainProvider> providers
-            = ServiceLoader.load(DomainProvider.class);
+    INSTANCE;
+
+    private static final Set<DomainModel> domains;
+    private static final Logger LOGGER = Logger.getLogger(Domains.class.getName());
+
+    static {
+        //load domains from current classpath using ServiceLoader
+        final ServiceLoader<DomainProvider> providers
+                = ServiceLoader.load(DomainProvider.class);
+
+        domains = new HashSet<>();
+
+        //TODO load and cache domain models
+    }
 
     /**
-     * Return all known domain model instances.
+     * All domain models known to this instance.
      *
-     * @return known application domain models
+     * @return non-backed collection of all known application domain models
      */
-    public static Collection<DomainModel> getModels() {
-        Collection<DomainModel> models = new ArrayList<>();
-        providers.forEach((p) -> p.stream().forEach(models::add));
-        return models;
+    public Collection<DomainModel> getModels() {
+        return new ArrayList(domains); //defensive copy
     }
 
     /**
@@ -59,44 +75,42 @@ public final class Domains {
      * @param domainVersion domain version
      * @return domain model, if known
      */
-    public static Optional<DomainModel> findModel(String domainName,
+    public Optional<DomainModel> findModel(String domainName,
             Version domainVersion) {
-        Iterator<DomainProvider> pi = providers.iterator();
-        while (pi.hasNext()) {
-            DomainProvider p = pi.next();
-            Optional<DomainModel> dm = p.stream()
-                    .filter((m) -> m.getName().contentEquals(domainName)
-                            && domainVersion.isWithin(m.getVersion()))
-                    .findFirst();
-            if (dm.isPresent()) {
-                return dm;
-            }
-        }
-        return Optional.empty();
+        return domains.stream().filter((dm)
+                -> dm.getName().contentEquals(domainName)
+                && dm.getVersion().isWithin(domainVersion))
+                .findFirst();
     }
 
     /**
      * Return the domain model for the provided class.
-     * 
+     *
      * @param domainClass java class that represents a domain component
      * @return associated domain model, if discoverable, or null
+     * @throws UnknownComponentException thrown if the class defines a domain
+     * but the domain model could not be found
+     * @throws NotDomainClassException thrown if a domain could not be
+     * identified for the class
+     * @throws InvalidDomainException thrown if the domain defined by the class
+     * is invalid
      */
-    public static DomainModel getModel(Class<?> domainClass)
-            throws UnknownComponentException, NotDomainClassException {
-        
-        String domainName = null;
-        Version domainVersion = null;
-        
-        //first check for @Domain
-        
-        
-        //now check for more specific domain annotations (object, value, 
-        //entity, event) that may override information in @Domain
-        
-        //set defaults if not explicitly set by annotation attributes
-        
-        
+    public DomainModel getModel(Class<?> domainClass)
+            throws UnknownComponentException, NotDomainClassException,
+            InvalidDomainException {
+
+        final DomainIdentity id = DomainReflection.identify(domainClass)
+                .orElseThrow(() -> new NotDomainClassException(domainClass));
+
+        return domains.stream()
+                .filter((dm) -> dm.getName().contentEquals(id.getDomainName()))
+                .filter((dm) -> dm.getVersion().equals(id.getVersion()))
+                .findAny()
+                .orElseThrow(()
+                        -> new UnknownComponentException(id.getDomainName(),
+                                id.getVersion().asString(),
+                                domainClass.getCanonicalName(),
+                                "Unknown domain model requested."));
     }
-    
-    
+
 }
