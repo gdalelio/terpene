@@ -1,0 +1,50 @@
+Terpene Secure Component Container
+
+
+
+   Terpene is a Government Open Source (GOSS) project funded by the US Army G2
+GEOINT office to develop a software component development framework 
+and runtime execution container designed to simplify the the process of creating 
+and {{{references/accreditation} accrediting}} (ICD 503/NIST SP 800-37) software 
+components for the unique data confidentiality and availability demands within 
+DoD unclassified and classified environments.
+
+Program Background
+
+   Terpene is a core infrastructural project of the GEOINT Enterprise TPED 
+Services (GETS) program.
+
+Documentation
+
+ * {{{./faq.html} FAQ}}
+
+ * {{{/docs/terpene_overview.pdf} Terpene Overview}}
+
+ * {{{/docs/terpene_quick_start.pdf} Terpene Quick Start}}
+
+ * {{{/docs/developerGuideIssue.html} Terpene Developer Guide}}
+
+ * {{{/docs/securityGuideIssue.html} Terpene Security Guide}}
+
+ * {{{/javadoc/terpene-api/} Javadoc: terpene-api}}
+
+ * {{{/javadoc/terpene-spi/} Javadoc: terpene-spi}}
+
+Support
+
+   Support for terpene is available in different ways, but before reaching out we 
+we recommend you first read the {{{./faq.html} FAQ}} and the 
+{{{/docs/terpene_overview.pdf} Terpene Overview}}, as they answer the most 
+common questions. 
+
+   There are two general ways to reach out to the terpene community: through 
+the {{{./mailing-lists.html} mailing lists}} and the {{{./support.html} issue 
+tracker}}.  Before submitting a new issue, please take a moment to search on 
+existing tickets, as your problem or feature request may already be 
+registered and you can instead add your vote to an existing ticket.
+
+Archives
+
+   Unless there are security concerns with a particular release, you can find 
+previous versions of terpene and related documentation from the 
+{{{/archive/index.html} archive}}.

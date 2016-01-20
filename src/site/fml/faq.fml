@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<faqs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/FML/1.0"
+      xsi:schemaLocation="http://maven.apache.org/FML/1.0 http://maven.apache.org/xsd/fml-1.0.xsd"
+      id="General FAQ">
+    <part id="General">
+        <faq id="what">
+            <question>What is terpene?</question>
+            <answer>
+                <p>
+                    Terpene is an software development and runtime environment created 
+                    to abstract away security and environmental non-functional aspects 
+                    common to all accrediated software components running in highly
+                    regulated networks, such as those in use by the Department of Defense
+                    and the Intelligence Community. 
+                </p>
+            </answer>
+        </faq>
+        <faq id="why">
+            <question>What makes terpene different from popular application servers?</question>
+            <answer>
+                <p>
+                    Similar to traditional application servers like Tomcat, Jetty, and 
+                    Glassfish, terpene platforms act as an application container where 
+                    business logic (components) is deployed.  
+            
+                    Unlike traditional application servers, terpene is specifically 
+                    designed to satisfy NIST SP 800-37, ICD 503, and DISA STIG rules 
+                    regarding data confidentiality, complete non-repudiation, and 
+                    high availability even for tactical systems. Terpene makes  
+                    "space-to-mud" a reality by handling the complicated non-functional 
+                    aspects, allowing developers to focus on the task at hand, 
+                    resulting in increased security, faster time to market, and 
+                    ease of software accreditation.
+                </p>
+            </answer>
+        </faq>
+        <faq id="who">
+            <question>Who is using terpene?</question>
+            <answer>
+                <p>
+                    Terpene is currently undergoing IOC testing and fielding by the 
+                    US Army G2 GEOINT division to deliver accrediated software 
+                    components that run across a heterogenous and distributed 
+                    containers including a public/private (hybrid) 
+                    cloud and tactical systems.
+                </p>
+            </answer>
+        </faq>
+    </part>
+</faqs>
