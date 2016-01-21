@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project name="terpene" xmlns="http://maven.apache.org/DECORATION/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+    <bannerLeft>
+        <name>terpene</name>
+        <href>http://terpene.geoint.org/</href>
+    </bannerLeft>
+    <!--
+    <bannerRight>
+      <src>http://maven.apache.org/images/maven-small.gif</src>
+    </bannerRight>
+    -->
+
+    <body>
+      
+        <!-- top nav -->
+        <links>
+            <item name="geoint.org" href="https://geoint.org/" />
+            <item name="source code" href="https://github.com/GEOINT/terpene"/>
+        </links>
+
+        <!-- side nav -->
+        <menu name="GET TERPENE">
+            <item name="Downloads" href="download.html"/>
+            <item name="Source" href="https://github.com/GEOINT/terpene"/>
+            <item name="License" href="license.html"/>
+        </menu>
+    
+        <menu name="DOCUMENTATION">
+            <item name="FAQ" href="faq.html"/>
+            <item name="Terpene Overview" href="docs/terpene_overview.pdf"/>
+            <item name="Quick Start" href="docs/terpene_quick_start.pdf"/>
+            <item name="Developer Guide" href="docs/developerGuideIssue.html"/>
+            <item name="Security Guide" href="docs/securityGuideIssue.html"/>
+            <item name="References" href="references/index.html"/>
+            <item name="Javadoc" href="javadoc/index.html"/>
+        </menu>
+    
+        <menu name="SUPPORT">
+            <item name="Mailing Lists" href="mail-lists.html"/>
+            <item name="Issue Tracker" href="https://github.com/geoint/terpene/issues"/>
+        </menu>
+    
+        ${reports}
+    </body>
+</project>

@@ -32,20 +32,6 @@ import java.lang.annotation.Target;
 public @interface Event {
 
     /**
-     * Name of the domain this event type is declared.
-     *
-     * @return domain name of the event
-     */
-    String domain();
-
-    /**
-     * Version(s) of the domain for this event type.
-     *
-     * @return domain version for this event
-     */
-    String version();
-
-    /**
      * Optional event type name.
      * <p>
      * If not provided the event type name is derived from the domain and class
@@ -55,7 +41,7 @@ public @interface Event {
      */
     String name() default "";
 
-     /**
+    /**
      * Optional description.
      * <p>
      * If not set there will not be a description.
@@ -63,5 +49,5 @@ public @interface Event {
      * @return description or null if no description is provided
      */
     String desc() default "";
-    
+
 }

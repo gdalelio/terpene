@@ -32,20 +32,6 @@ import java.lang.annotation.Target;
 public @interface Entity {
 
     /**
-     * Name of the domain this entity type.
-     *
-     * @return domain name of the event
-     */
-    String domain();
-
-    /**
-     * Version(s) of the domain this class represents the entity type.
-     *
-     * @return domain version for this entity
-     */
-    String version();
-
-    /**
      * Optional entity type name.
      * <p>
      * If not provided the entity type name is derived from the domain and class

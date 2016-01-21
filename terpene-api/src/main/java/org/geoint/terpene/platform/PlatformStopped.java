@@ -6,8 +6,8 @@ import org.geoint.terpene.domain.Event;
 /**
  *
  */
-@Event(domain = "org.geoint.terpene",
-        version = "1.0")
+@Event(name = "platformStopped",
+        desc = "Indicates a terpene platform has stopped.")
 public class PlatformStopped {
 
     private final TerpenePlatform platform;

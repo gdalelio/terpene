@@ -17,7 +17,7 @@ package org.geoint.terpene.domain;
 
 import java.util.Optional;
 import org.geoint.terpene.domain.model.EventModel;
-import org.geoint.terpene.util.GUID;
+import org.geoint.terpene.GUID;
 
 /**
  * A domain event instance.

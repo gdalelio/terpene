@@ -22,7 +22,7 @@ import java.util.Collection;
  *
  * @author steve_siebert
  */
-public interface OperationModel {
+public interface OperationModel extends DomainComponentModel {
 
     /**
      * Model of the operation parameters.

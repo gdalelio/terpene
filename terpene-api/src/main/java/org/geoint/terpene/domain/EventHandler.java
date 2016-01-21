@@ -35,7 +35,7 @@ public interface EventHandler<T> {
     /**
      * Synchronously executes the domain event handler.
      *
-     * @param event
+     * @param event event to handle
      * @throws EventNotSupportedException thrown if the handler does not support
      * the provided domain event
      * @throws HandlerExecutionException thrown if the handler throws an

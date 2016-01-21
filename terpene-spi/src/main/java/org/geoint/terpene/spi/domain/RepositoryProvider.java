@@ -15,9 +15,10 @@
  */
 package org.geoint.terpene.spi.domain;
 
+import java.util.ServiceLoader;
 import java.util.stream.Stream;
+import org.geoint.terpene.domain.Version;
 import org.geoint.terpene.domain.repo.EntityRepository;
-import org.geoint.version.Version;
 
 /**
  * Provides EntityRepository instances.

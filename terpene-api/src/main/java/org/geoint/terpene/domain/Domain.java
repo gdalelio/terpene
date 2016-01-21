@@ -17,22 +17,27 @@ package org.geoint.terpene.domain;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Declares a class as one which defines a domain object.
+ * Defines the domain model the domain component(s) are a member of.
  * <p>
- * If this annotation is used along with {@link Value}, {@link Entity}, or
- * {@link Event} the values contained in those more specific declarations will
- * override any contained within this annotation.
+ * This annotation is used along with {@link Value}, {@link Entity}, or
+ * {@link Event}, which specify the domain component type the java class
+ * represents.
  *
+ * @see Value
+ * @see Entity
+ * @see Event
  * @author steve_siebert
  */
-@Target(ElementType.TYPE)
+@Target({ElementType.TYPE, ElementType.PACKAGE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@Inherited
 public @interface Domain {
 
     /**
@@ -49,22 +54,4 @@ public @interface Domain {
      */
     String version();
 
-    /**
-     * Optional component name.
-     * <p>
-     * If not provided the component name is derived from the domain and class
-     * name.
-     *
-     * @return component name
-     */
-    String name() default "";
-
-    /**
-     * Optional description.
-     * <p>
-     * If not set there will not be a description.
-     *
-     * @return description or null if no description is provided
-     */
-    String desc() default "";
 }

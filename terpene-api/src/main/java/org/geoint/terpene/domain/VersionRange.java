@@ -15,8 +15,8 @@
  */
 package org.geoint.terpene.domain;
 
+import java.util.Objects;
 import java.util.Optional;
-import java.util.function.BiPredicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
  *
  * @author steve_siebert
  */
+@Value(name="versionRange", desc = "a range of versions")
 public final class VersionRange {
 
     private final boolean startInclusive;
@@ -42,10 +43,10 @@ public final class VersionRange {
     private static final String END_EXCLUSIVE = ")";
     private static final String RANGE_SEPARATOR = ",";
     private static final Pattern VERSION_PATTERN = Pattern.compile(
-            "([\\" + START_INCLUSIVE + "\\" + START_EXCLUSIVE + "])?" //[1] start inclusive/exclusive
-            + Version.VERSION_PATTERN
-            + "(\\" + RANGE_SEPARATOR + "(" + Version.VERSION_PATTERN + "))?"
-            + "([\\" + END_INCLUSIVE + "\\" + END_EXCLUSIVE + "])?");//[15] end inclusive/eclusive; complete optional end version
+            "([\\" + START_INCLUSIVE + "\\" + START_EXCLUSIVE + "])" //[1] start inclusive/exclusive
+            + "(" + Version.VERSION_PATTERN + ")?" //[3] major [4] minor [6] increment [7] qualifier
+            + "(\\" + RANGE_SEPARATOR + "(" + Version.VERSION_PATTERN + ")?)?" //[8] range [10] major [11] minor [13] increment [14] qualifier
+            + "([\\" + END_INCLUSIVE + "\\" + END_EXCLUSIVE + "])");//[15] end inclusive/eclusive; complete optional end version
 
     private VersionRange(String stringRepresentation,
             boolean startInclusive, Version startVersion,
@@ -74,22 +75,35 @@ public final class VersionRange {
         if (!m.find()) {
             return null;
         }
-
-        int count = m.groupCount();
-        for (int i = 0; i <= count; i++) {
-            System.out.println(String.format("%d\t%s", i, m.group(i)));
-        }
-
+        
         try {
 
-            boolean startInclusive = (m.group(1) == null)
-                    ? true //default is inclusive
-                    : m.group(1).contentEquals(START_INCLUSIVE);
-            Version startVersion = Version.valueOf(m.group(2));
-            Version endVersion = Version.valueOf(m.group(8));
-            boolean endInclusive = (m.group(15) == null)
-                    ? true //default is inclusive
-                    : m.group(15).contentEquals(END_INCLUSIVE);
+            boolean startInclusive = m.group(1).contentEquals(START_INCLUSIVE);
+            Version startVersion = (m.group(3) != null)
+                    ? new Version(Integer.valueOf(m.group(3)),
+                            Integer.valueOf(m.group(4)),
+                            (m.group(6) != null) ? Integer.valueOf(m.group(6)) : 0,
+                            VersionQualifier.valueOf(m.group(7)))
+                    : null;
+
+            //if there wasn't a range separator specified, make the end version 
+            //the same as the start version and both start and end inclusive
+            Version endVersion;
+            boolean endInclusive;
+
+            if (m.group(8) == null) {
+                endVersion = startVersion;
+                startInclusive = true;
+                endInclusive = true;
+            } else {
+                endVersion = (m.group(10) != null)
+                        ? new Version(Integer.valueOf(m.group(10)),
+                                Integer.valueOf(m.group(11)),
+                                (m.group(13) != null) ? Integer.valueOf(m.group(13)) : 0,
+                                VersionQualifier.valueOf(m.group(14)))
+                        : null;
+                endInclusive = m.group(15).contentEquals(END_INCLUSIVE);
+            }
 
             return new VersionRange(versionString, startInclusive, startVersion,
                     endInclusive, endVersion);
@@ -145,4 +159,63 @@ public final class VersionRange {
         sb.append((endInclusive) ? END_INCLUSIVE : END_EXCLUSIVE);
         return sb.toString();
     }
+
+    public boolean isStartInclusive() {
+        return startInclusive;
+    }
+
+    public boolean isStartOpen() {
+        return !startVersion.isPresent();
+    }
+
+    public Optional<Version> getStartVersion() {
+        return startVersion;
+    }
+
+    public boolean isEndOpen() {
+        return !endVersion.isPresent();
+    }
+
+    public boolean isEndInclusive() {
+        return endInclusive;
+    }
+
+    public Optional<Version> getEndVersion() {
+        return endVersion;
+    }
+
+    public String asString() {
+        return stringRepresentation;
+    }
+
+    @Override
+    public String toString() {
+        return asString();
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.stringRepresentation);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final VersionRange other = (VersionRange) obj;
+        if (!Objects.equals(this.stringRepresentation, other.stringRepresentation)) {
+            return false;
+        }
+        return true;
+    }
+
 }

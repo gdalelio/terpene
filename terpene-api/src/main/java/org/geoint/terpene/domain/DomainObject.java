@@ -40,7 +40,8 @@ public interface DomainObject<T> extends DomainData<T> {
      * @param compositeModel model of the composite
      * @return instance of the requested domain data or null composite of this
      * type is not defined by the model
-     * @throws org.geoint.terpene.domain.UnknownComponentException
+     * @throws UnknownComponentException thrown if the domain model does not 
+     * define a composite of this model within this object
      */
     <C> DomainData<C> getComposite(DataModel<C> compositeModel)
             throws UnknownComponentException;

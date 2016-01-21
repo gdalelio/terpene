@@ -33,133 +33,137 @@ public class VersionRangeTest {
     @Test
     public void testParseCompleteVersionComponents() throws Exception {
         final String str = "[1.0.0-DEV,2.1.15-PROD]";
-        Version v = Version.valueOf(str);
+        VersionRange v = VersionRange.valueOf(str);
 
         assertNotNull(v);
         assertTrue(v.isStartInclusive());
-        assertEquals(Integer.valueOf(1), v.getStartMajor());
-        assertEquals(Integer.valueOf(0), v.getStartMinor());
-        assertEquals(Integer.valueOf(0), v.getStartIncrement().get());
-        assertEquals(VersionQualifier.DEV, v.getStartQualifier());
+        assertFalse(v.isStartOpen());
+        Version sv = v.getStartVersion().get();
+        assertEquals(Integer.valueOf(1), sv.getMajor());
+        assertEquals(Integer.valueOf(0), sv.getMinor());
+        assertEquals(Integer.valueOf(0), sv.getIncrement());
+        assertEquals(VersionQualifier.DEV, sv.getQualifier());
         assertTrue(v.isEndInclusive());
-        assertEquals(Integer.valueOf(2), v.getEndMajor());
-        assertEquals(Integer.valueOf(1), v.getEndMinor());
-        assertEquals(Integer.valueOf(15), v.getEndIncrement().get());
-        assertEquals(VersionQualifier.PROD, v.getEndQualifier());
-
+        assertFalse(v.isEndOpen());
+        Version ev = v.getEndVersion().get();
+        assertEquals(Integer.valueOf(2), ev.getMajor());
+        assertEquals(Integer.valueOf(1), ev.getMinor());
+        assertEquals(Integer.valueOf(15), ev.getIncrement());
+        assertEquals(VersionQualifier.PROD, ev.getQualifier());
     }
 
     @Test
-    public void testParseNoConstraints() throws Exception {
+    public void testParseNoRange() throws Exception {
         final String str = "1.0-DEV";
-        Version v = Version.valueOf(str);
+       
+        VersionRange v = VersionRange.valueOf(str);
 
-        assertNotNull(v);
-        assertFalse(v.isStartOpen());
-        assertTrue(v.isStartInclusive());
-        assertEquals(Integer.valueOf(1), v.getStartMajor());
-        assertEquals(Integer.valueOf(0), v.getStartMinor());
-        assertFalse(v.getStartIncrement().isPresent());
-        assertEquals(VersionQualifier.DEV, v.getStartQualifier());
-        assertTrue(v.isEndInclusive());
-        assertEquals(Integer.valueOf(1), v.getEndMajor());
-        assertEquals(Integer.valueOf(0), v.getEndMinor());
-        assertFalse(v.getEndIncrement().isPresent());
-        assertEquals(VersionQualifier.DEV, v.getEndQualifier());
+        assertNull(v);
     }
 
     @Test
     public void testParseExact() throws Exception {
         final String str = "[1.0-DEV]";
-        Version v = Version.valueOf(str);
+        final Integer expectedMajor = 1;
+        final Integer expectedMinor = 0;
+        final Integer expectedIncrement = 0;
+        final VersionQualifier expectedQualifier = VersionQualifier.DEV;
+
+        VersionRange v = VersionRange.valueOf(str);
 
         assertNotNull(v);
         assertFalse(v.isStartOpen());
         assertTrue(v.isStartInclusive());
-        assertEquals(Integer.valueOf(1), v.getStartMajor());
-        assertEquals(Integer.valueOf(0), v.getStartMinor());
-        assertFalse(v.getStartIncrement().isPresent());
-        assertEquals(VersionQualifier.DEV, v.getStartQualifier());
+        Version sv = v.getStartVersion().get();
+        assertEquals(expectedMajor, sv.getMajor());
+        assertEquals(expectedMinor, sv.getMinor());
+        assertEquals(expectedIncrement, sv.getIncrement());
+        assertEquals(expectedQualifier, sv.getQualifier());
         assertTrue(v.isEndInclusive());
-        assertEquals(Integer.valueOf(1), v.getEndMajor());
-        assertEquals(Integer.valueOf(0), v.getEndMinor());
-        assertFalse(v.getEndIncrement().isPresent());
-        assertEquals(VersionQualifier.DEV, v.getEndQualifier());
+        assertFalse(v.isEndOpen());
+        Version ev = v.getEndVersion().get();
+        assertEquals(expectedMajor, ev.getMajor());
+        assertEquals(expectedMinor, ev.getMinor());
+        assertEquals(expectedIncrement, ev.getIncrement());
+        assertEquals(expectedQualifier, ev.getQualifier());
     }
 
     @Test
     public void testParseInclusiveRange() throws Exception {
         final String str = "[1.2-DEV,1.3-DEV]";
-        Version v = Version.valueOf(str);
+        VersionRange v = VersionRange.valueOf(str);
 
         assertNotNull(v);
         assertFalse(v.isStartOpen());
         assertTrue(v.isStartInclusive());
-        assertEquals(Integer.valueOf(1), v.getStartMajor());
-        assertEquals(Integer.valueOf(2), v.getStartMinor());
-        assertFalse(v.getStartIncrement().isPresent());
-        assertEquals(VersionQualifier.DEV, v.getStartQualifier());
+        Version sv = v.getStartVersion().get();
+        assertEquals(Integer.valueOf(1), sv.getMajor());
+        assertEquals(Integer.valueOf(2), sv.getMinor());
+        assertEquals(Integer.valueOf(0), sv.getIncrement());
+        assertEquals(VersionQualifier.DEV, sv.getQualifier());
         assertTrue(v.isEndInclusive());
-        assertEquals(Integer.valueOf(1), v.getEndMajor());
-        assertEquals(Integer.valueOf(3), v.getEndMinor());
-        assertFalse(v.getEndIncrement().isPresent());
-        assertEquals(VersionQualifier.DEV, v.getEndQualifier());
+        assertFalse(v.isEndOpen());
+        Version ev = v.getEndVersion().get();
+        assertEquals(Integer.valueOf(1), ev.getMajor());
+        assertEquals(Integer.valueOf(3), ev.getMinor());
+        assertEquals(Integer.valueOf(0), ev.getIncrement());
+        assertEquals(VersionQualifier.DEV, ev.getQualifier());
     }
 
     @Test
     public void testParseStartOpen() throws Exception {
         final String str = "(,1.0-DEV]";
-        Version v = Version.valueOf(str);
+        VersionRange v = VersionRange.valueOf(str);
 
         assertNotNull(v);
         assertTrue(v.isStartOpen());
-        assertNull(v.getStartMajor());
-        assertNull(v.getStartMinor());
-        assertFalse(v.getStartIncrement().isPresent());
-        assertNull(v.getStartQualifier());
+        assertFalse(v.getStartVersion().isPresent());
         assertTrue(v.isEndInclusive());
         assertFalse(v.isEndOpen());
-        assertEquals(Integer.valueOf(1), v.getEndMajor());
-        assertEquals(Integer.valueOf(0), v.getEndMinor());
-        assertFalse(v.getEndIncrement().isPresent());
-        assertEquals(VersionQualifier.DEV, v.getEndQualifier());
+        Version ev = v.getEndVersion().get();
+        assertEquals(Integer.valueOf(1), ev.getMajor());
+        assertEquals(Integer.valueOf(0), ev.getMinor());
+        assertEquals(Integer.valueOf(0), ev.getIncrement());
+        assertEquals(VersionQualifier.DEV, ev.getQualifier());
     }
 
     @Test
     public void testParseEndExclusive() throws Exception {
         final String str = "[1.0-DEV,2.0-DEV)";
-        Version v = Version.valueOf(str);
+        VersionRange v = VersionRange.valueOf(str);
 
         assertNotNull(v);
         assertFalse(v.isStartOpen());
         assertTrue(v.isStartInclusive());
-        assertEquals(Integer.valueOf(1), v.getStartMajor());
-        assertEquals(Integer.valueOf(0), v.getStartMinor());
-        assertFalse(v.getStartIncrement().isPresent());
-        assertEquals(VersionQualifier.DEV, v.getStartQualifier());
+        Version sv = v.getStartVersion().get();
+        assertEquals(Integer.valueOf(1), sv.getMajor());
+        assertEquals(Integer.valueOf(0), sv.getMinor());
+        assertEquals(Integer.valueOf(0), sv.getIncrement());
+        assertEquals(VersionQualifier.DEV, sv.getQualifier());
         assertFalse(v.isEndInclusive());
-        assertEquals(Integer.valueOf(2), v.getEndMajor());
-        assertEquals(Integer.valueOf(0), v.getEndMinor());
-        assertFalse(v.getEndIncrement().isPresent());
-        assertEquals(VersionQualifier.DEV, v.getEndQualifier());
+        assertFalse(v.isEndOpen());
+        Version ev = v.getEndVersion().get();
+        assertEquals(Integer.valueOf(2), ev.getMajor());
+        assertEquals(Integer.valueOf(0), ev.getMinor());
+        assertEquals(Integer.valueOf(0), ev.getIncrement());
+        assertEquals(VersionQualifier.DEV, ev.getQualifier());
 
     }
 
     @Test
     public void testParseEndOpen() throws Exception {
         final String str = "[1.5-DEV,)";
-        Version v = Version.valueOf(str);
+        VersionRange v = VersionRange.valueOf(str);
 
         assertNotNull(v);
         assertFalse(v.isStartOpen());
         assertTrue(v.isStartInclusive());
-        assertEquals(Integer.valueOf(1), v.getStartMajor());
-        assertEquals(Integer.valueOf(5), v.getStartMinor());
-        assertFalse(v.getStartIncrement().isPresent());
-        assertEquals(VersionQualifier.DEV, v.getStartQualifier());
+        Version sv = v.getStartVersion().get();
+        assertEquals(Integer.valueOf(1), sv.getMajor());
+        assertEquals(Integer.valueOf(5), sv.getMinor());
+        assertEquals(Integer.valueOf(0), sv.getIncrement());
+        assertEquals(VersionQualifier.DEV, sv.getQualifier());
         assertFalse(v.isEndInclusive());
         assertTrue(v.isEndOpen());
-
     }
-
 }
