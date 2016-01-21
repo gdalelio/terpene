@@ -99,15 +99,6 @@
         <!-- terpene component interfaces -->
         <module>terpene-api</module>
         <module>terpene-spi</module>
-        
-        <!-- implementations -->
-        <module>terpene-core</module>
-        <module>terpene-platform-jvm</module>
-        <module>terpene-rest-client</module>
-        <module>terpene-cli</module>
-        
-        <!-- Example/demo code -->
-        <module>terpene-demo-component</module>
     </modules>
      
 </project>
