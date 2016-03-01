@@ -11,3 +11,4 @@ touch 1Mar2016 0822 - fixed github accounts email verification
 touch 1Mar2016 0826
 touch 1Mar2016 0831 - trying remote push rather than a local commit to trigger ci
 touch 1Mar2016 0834 - re-saved project config, seeing if it triggers a subscription
+touch 1Mar2016 0849 - scm@geoint.org did not have repo admin privs, so could not create hook.  manually registered hook
